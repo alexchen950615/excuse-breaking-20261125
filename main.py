@@ -6,6 +6,9 @@ ENTRY = "The good news: the deploy only took four seconds. The bad news: so did 
 
 
 def main() -> None:
+    # Gate: entry must be a single line of 1-180 characters.
+    assert 1 <= len(ENTRY) <= 180, f"entry length {len(ENTRY)} out of range"
+    assert "\n" not in ENTRY and "\r" not in ENTRY, "entry must be a single line"
     output_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(output_dir, exist_ok=True)
     path = os.path.join(output_dir, "entry.txt")
